@@ -3,17 +3,23 @@ package com.mashibing.tank;
 import java.awt.*;
 
 public class Bullet {
-    private static final int SPEED = 1;
+    private static final int SPEED = 10;
     private int x, y;
     private static final int width = 30, height = 30;
     private Dir dir;
+    private TankFrame tf = null;
+    boolean live = true;
 
-    public Bullet(int x, int y, Dir dir) {
+    public Bullet(int x, int y, Dir dir, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.tf = tf;
     }
     public void paint(Graphics g){
+        if (!live){
+            tf.bullets.remove(this);
+        }
         Color c = g.getColor();
         g.setColor(Color.RED);
         g.fillOval(x, y, width, height);
@@ -28,6 +34,9 @@ public class Bullet {
             case UP -> y -= SPEED;
             case DOWN -> y += SPEED;
             default -> {}
+        }
+        if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT){
+            live = false;
         }
     }
 

@@ -5,11 +5,15 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class TankFrame extends Frame {
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
     Tank myTank = new Tank(200, 200, Dir.DOWN, this);
     Bullet b = null;
+    List<Bullet> bullets = new ArrayList<>();
     public TankFrame() throws HeadlessException {
         setSize(GAME_WIDTH, GAME_HEIGHT);
         setResizable(false);
@@ -46,8 +50,20 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g){
+        Color c = g.getColor();
+        g.setColor(Color.WHITE);
+        g.drawString("子弹的数量：" + bullets.size(), 10, 60);
         myTank.paint(g);
-        b.paint(g);
+        //迭代器进行迭代的时候，不能在其他地方删除，只能在迭代的内部删除
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets.get(i).paint(g);
+        }
+
+//        第二种方法
+//        for(Iterator<Bullet> it = bullets.iterator(); it.hasNext();){
+//            b = it.next();
+//            if(!b.live) it.remove();
+//        }
     }
 
     class MyKeyListener extends KeyAdapter{
