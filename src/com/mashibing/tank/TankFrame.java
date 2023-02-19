@@ -8,8 +8,8 @@ import java.awt.event.WindowEvent;
 
 public class TankFrame extends Frame {
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
-    Tank myTank = new Tank(200, 200, Dir.DOWN);
-    Bullet b = new Bullet(300, 300, Dir.DOWN);
+    Tank myTank = new Tank(200, 200, Dir.DOWN, this);
+    Bullet b = null;
     public TankFrame() throws HeadlessException {
         setSize(GAME_WIDTH, GAME_HEIGHT);
         setResizable(false);
@@ -93,6 +93,7 @@ public class TankFrame extends Frame {
                 case KeyEvent.VK_UP -> bU = false;
                 case KeyEvent.VK_RIGHT -> bR = false;
                 case KeyEvent.VK_DOWN -> bD = false;
+                case KeyEvent.VK_CONTROL -> myTank.fire();
                 default -> {
                 }
             }
