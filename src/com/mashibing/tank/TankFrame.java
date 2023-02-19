@@ -7,10 +7,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class TankFrame extends Frame {
-    int x = 200;
-    int y = 200;
-    Dir dir = Dir.DOWN;
-    final int SPEED = 10;
+    Tank myTank = new Tank(200, 200, Dir.DOWN);
     public TankFrame() throws HeadlessException {
         setSize(800, 600);
         setResizable(false);
@@ -30,23 +27,7 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g){
-        System.out.println("paint");
-        g.fillRect(x, y, 50, 50);
-        switch (dir) {
-            case LEFT:
-                x -= SPEED;
-                break;
-            case RIGHT:
-                x += SPEED;
-                break;
-            case UP:
-                y -= SPEED;
-                break;
-            case DOWN:
-                y += SPEED;
-                break;
-
-        }
+        myTank.paint(g);
     }
 
     class MyKeyListener extends KeyAdapter{
@@ -60,31 +41,22 @@ public class TankFrame extends Frame {
             super.keyPressed(e);
             int key = e.getKeyCode();
             switch (key) {
-                case KeyEvent.VK_LEFT :
-                    bL = true;
-                    break;
-                case KeyEvent.VK_UP:
-                    bU = true;
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    bR = true;
-                    break;
-                case KeyEvent.VK_DOWN:
-                    bD = true;
-                    break;
-                default:
-                    break;
-
+                case KeyEvent.VK_LEFT -> bL = true;
+                case KeyEvent.VK_UP -> bU = true;
+                case KeyEvent.VK_RIGHT -> bR = true;
+                case KeyEvent.VK_DOWN -> bD = true;
+                default -> {
+                }
             }
             setMainTankDir();
 
         }
 
         private void setMainTankDir() {
-            if(bL) dir = Dir.LEFT;
-            if(bR) dir = Dir.RIGHT;
-            if(bU) dir = Dir.UP;
-            if(bD) dir = Dir.DOWN;
+            if(bL) myTank.setDir(Dir.LEFT);
+            if(bR) myTank.setDir(Dir.RIGHT);
+            if(bU) myTank.setDir(Dir.UP);
+            if(bD) myTank.setDir(Dir.DOWN);
         }
 
         @Override
@@ -92,21 +64,12 @@ public class TankFrame extends Frame {
             super.keyReleased(e);
             int key = e.getKeyCode();
             switch (key) {
-                case KeyEvent.VK_LEFT :
-                    bL = false;
-                    break;
-                case KeyEvent.VK_UP:
-                    bU = false;
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    bR = false;
-                    break;
-                case KeyEvent.VK_DOWN:
-                    bD = false;
-                    break;
-                default:
-                    break;
-
+                case KeyEvent.VK_LEFT -> bL = false;
+                case KeyEvent.VK_UP -> bU = false;
+                case KeyEvent.VK_RIGHT -> bR = false;
+                case KeyEvent.VK_DOWN -> bD = false;
+                default -> {
+                }
             }
         }
     }
