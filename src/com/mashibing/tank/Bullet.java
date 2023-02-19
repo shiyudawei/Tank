@@ -2,25 +2,26 @@ package com.mashibing.tank;
 
 import java.awt.*;
 
-public class Tank {
+public class Bullet {
+    private static final int SPEED = 10;
     private int x, y;
-    private Dir dir = Dir.DOWN;
-    private final int SPEED = 5;
-    private boolean moving = false;
+    private static final int width = 30, height = 30;
+    private Dir dir;
 
-    public Tank(int x, int y, Dir dir) {
+    public Bullet(int x, int y, Dir dir) {
         this.x = x;
         this.y = y;
         this.dir = dir;
     }
-
     public void paint(Graphics g){
+        Color c = g.getColor();
+        g.setColor(Color.RED);
+        g.fillOval(x, y, width, height);
+        g.setColor(c);
         move();
-        g.fillRect(x, y,50, 50);
     }
 
     private void move() {
-        if(!moving) return;
         switch (dir) {
             case LEFT -> x -= SPEED;
             case RIGHT -> x += SPEED;
@@ -52,17 +53,5 @@ public class Tank {
 
     public void setDir(Dir dir) {
         this.dir = dir;
-    }
-
-    public int getSPEED() {
-        return SPEED;
-    }
-
-    public boolean isMoving() {
-        return moving;
-    }
-
-    public void setMoving(boolean moving) {
-        this.moving = moving;
     }
 }
