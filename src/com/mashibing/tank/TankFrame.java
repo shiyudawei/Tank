@@ -53,6 +53,11 @@ public class TankFrame extends Frame {
         }
 
         private void setMainTankDir() {
+            //设置移动
+            myTank.setMoving(true);
+            //设置停止
+            if(!bL && !bU && !bD && !bR) myTank.setMoving(false);
+            //设置移动方向
             if(bL) myTank.setDir(Dir.LEFT);
             if(bR) myTank.setDir(Dir.RIGHT);
             if(bU) myTank.setDir(Dir.UP);
@@ -71,6 +76,7 @@ public class TankFrame extends Frame {
                 default -> {
                 }
             }
+            setMainTankDir();
         }
     }
 
