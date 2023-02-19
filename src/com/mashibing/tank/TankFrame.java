@@ -9,6 +9,8 @@ import java.awt.event.WindowEvent;
 public class TankFrame extends Frame {
     int x = 200;
     int y = 200;
+    Dir dir = Dir.DOWN;
+    final int SPEED = 10;
     public TankFrame() throws HeadlessException {
         setSize(800, 600);
         setResizable(false);
@@ -30,8 +32,21 @@ public class TankFrame extends Frame {
     public void paint(Graphics g){
         System.out.println("paint");
         g.fillRect(x, y, 50, 50);
-//        x += 10;
-//        y += 10;
+        switch (dir) {
+            case LEFT:
+                x -= SPEED;
+                break;
+            case RIGHT:
+                x += SPEED;
+                break;
+            case UP:
+                y -= SPEED;
+                break;
+            case DOWN:
+                y += SPEED;
+                break;
+
+        }
     }
 
     class MyKeyListener extends KeyAdapter{
@@ -61,7 +76,15 @@ public class TankFrame extends Frame {
                     break;
 
             }
+            setMainTankDir();
 
+        }
+
+        private void setMainTankDir() {
+            if(bL) dir = Dir.LEFT;
+            if(bR) dir = Dir.RIGHT;
+            if(bU) dir = Dir.UP;
+            if(bD) dir = Dir.DOWN;
         }
 
         @Override
