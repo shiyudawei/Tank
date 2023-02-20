@@ -11,7 +11,8 @@ import java.util.List;
 
 public class TankFrame extends Frame {
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
-    Tank myTank = new Tank(200, 200, Dir.DOWN, this);
+    public List<Tank> tanks = new ArrayList<>();
+    Tank myTank = new Tank(400, 400, Dir.DOWN, this);
     Bullet b = null;
     List<Bullet> bullets = new ArrayList<>();
     public TankFrame() throws HeadlessException {
@@ -54,20 +55,17 @@ public class TankFrame extends Frame {
         g.setColor(Color.WHITE);
         g.drawString("子弹的数量：" + bullets.size(), 10, 60);
         myTank.paint(g);
-//        这种会报错
-//        for (Bullet bullet : bullets) {
-//            bullet.paint(g);
-//        }
-        //迭代器进行迭代的时候，不能在其他地方删除，只能在迭代的内部删除
+
         for (int i = 0; i < bullets.size(); i++) {
             bullets.get(i).paint(g);
         }
 
-//        第二种方法
-//        for(Iterator<Bullet> it = bullets.iterator(); it.hasNext();){
-//            b = it.next();
-//            if(!b.live) it.remove();
-//        }
+        for (int i = 0; i < tanks.size(); i++) {
+            tanks.get(i).paint(g);
+
+        }
+
+
     }
 
     class MyKeyListener extends KeyAdapter{
