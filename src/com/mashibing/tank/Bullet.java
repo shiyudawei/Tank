@@ -3,7 +3,7 @@ package com.mashibing.tank;
 import java.awt.*;
 
 public class Bullet {
-    private static final int SPEED = 10;
+    private static final int SPEED = 20;
     private int x, y;
     private static final int width = 30, height = 30;
     private Dir dir;
@@ -20,10 +20,12 @@ public class Bullet {
         if (!live){
             tf.bullets.remove(this);
         }
-        Color c = g.getColor();
-        g.setColor(Color.RED);
-        g.fillOval(x, y, width, height);
-        g.setColor(c);
+        switch (dir) {
+            case LEFT -> g.drawImage(ResourceManger.bulletL, x, y, null);
+            case RIGHT -> g.drawImage(ResourceManger.bulletR, x, y, null);
+            case DOWN -> g.drawImage(ResourceManger.bulletD, x, y, null);
+            case UP -> g.drawImage(ResourceManger.bulletU, x, y, null);
+        }
         move();
     }
 
