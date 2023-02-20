@@ -10,6 +10,7 @@ public class Tank {
     private final int SPEED = 5;
     private boolean moving = false;
     private TankFrame tf = null;
+    private boolean live = true;
 
     public Tank(int x, int y, Dir dir, TankFrame tf) {
         this.x = x;
@@ -19,14 +20,15 @@ public class Tank {
     }
 
     public void paint(Graphics g){
+        if (!this.live) {
+            tf.tanks.remove(this);
+        }
         switch (dir){
             case LEFT -> g.drawImage(ResourceManger.tankL, x, y, null);
             case RIGHT -> g.drawImage(ResourceManger.tankR, x, y, null);
             case UP -> g.drawImage(ResourceManger.tankU, x, y, null);
             case DOWN -> g.drawImage(ResourceManger.tankD, x, y, null);
         }
-
-
         move();
     }
 
@@ -65,6 +67,10 @@ public class Tank {
         tf.bullets.add( new Bullet(bx, by, this.dir, tf));
     }
 
+    public void die() {
+        this.live = false;
+    }
+
     public int getX() {
         return x;
     }
@@ -100,6 +106,7 @@ public class Tank {
     public void setMoving(boolean moving) {
         this.moving = moving;
     }
+
 
 
 }
