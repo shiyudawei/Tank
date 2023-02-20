@@ -14,6 +14,7 @@ public class Tank {
     private boolean live = true;
     private Random random = new Random();
     private Group group = Group.BAD;
+    private Explode e;
 
     public Tank(int x, int y, Dir dir, TankFrame tf, Group group) {
         this.x = x;
@@ -25,6 +26,8 @@ public class Tank {
 
     public void paint(Graphics g){
         if (!this.live) {
+            this.e = new Explode(x, y, tf);
+            tf.explodes.add(e);
             tf.tanks.remove(this);
             return;
         }

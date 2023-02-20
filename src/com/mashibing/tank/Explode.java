@@ -20,7 +20,7 @@ public class Explode {
     public void paint(Graphics g){
        g.drawImage(ResourceManger.explosion[step++], x, y, null);
        if (step >= ResourceManger.explosion.length){
-           step = 0;
+           tf.explodes.remove(this);
        }
 
 

@@ -14,8 +14,8 @@ public class TankFrame extends Frame {
     public List<Tank> tanks = new ArrayList<>();
     Tank myTank = new Tank(400, 400, Dir.DOWN, this, Group.GOOD);
     Bullet b = null;
-    List<Bullet> bullets = new ArrayList<>();
-    Explode e = new Explode(100, 100, this);
+    public List<Bullet> bullets = new ArrayList<>();
+    public List<Explode> explodes = new ArrayList<>();
     public TankFrame() throws HeadlessException {
         setSize(GAME_WIDTH, GAME_HEIGHT);
         setResizable(false);
@@ -73,7 +73,12 @@ public class TankFrame extends Frame {
                 bullets.get(i).collideWith(myTank);
             }
         }
-        e.paint(g);
+
+        for (int i = 0; i < explodes.size(); i++) {
+            explodes.get(i).paint(g);
+
+        }
+
 
     }
 
