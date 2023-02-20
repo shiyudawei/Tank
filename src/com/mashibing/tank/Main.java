@@ -5,7 +5,9 @@ public class Main {
        TankFrame tf = new TankFrame();
        //初始化敌方坦克
         for (int i = 0; i < 5; i++) {
-            tf.tanks.add(new Tank(50 + i*80, 200, Dir.DOWN, tf));
+            Tank t = new Tank(50 + i*80, 100, Dir.DOWN, tf, Group.BAD);
+            t.setMoving(true);
+            tf.tanks.add(t);
 
         }
 

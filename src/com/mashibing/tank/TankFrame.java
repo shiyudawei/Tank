@@ -12,7 +12,7 @@ import java.util.List;
 public class TankFrame extends Frame {
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
     public List<Tank> tanks = new ArrayList<>();
-    Tank myTank = new Tank(400, 400, Dir.DOWN, this);
+    Tank myTank = new Tank(400, 400, Dir.DOWN, this, Group.GOOD);
     Bullet b = null;
     List<Bullet> bullets = new ArrayList<>();
     public TankFrame() throws HeadlessException {
@@ -69,6 +69,7 @@ public class TankFrame extends Frame {
         for (int i = 0; i < bullets.size(); i++) {
             for (int j = 0; j < tanks.size(); j++) {
                 bullets.get(i).collideWith(tanks.get(j));
+                bullets.get(i).collideWith(myTank);
             }
 
 

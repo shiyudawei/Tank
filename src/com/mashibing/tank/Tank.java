@@ -1,6 +1,7 @@
 package com.mashibing.tank;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Tank {
     private int x, y;
@@ -11,17 +12,21 @@ public class Tank {
     private boolean moving = false;
     private TankFrame tf = null;
     private boolean live = true;
+    private Random random = new Random();
+    private Group group = Group.BAD;
 
-    public Tank(int x, int y, Dir dir, TankFrame tf) {
+    public Tank(int x, int y, Dir dir, TankFrame tf, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.tf = tf;
+        this.group = group;
     }
 
     public void paint(Graphics g){
         if (!this.live) {
             tf.tanks.remove(this);
+            return;
         }
         switch (dir){
             case LEFT -> g.drawImage(ResourceManger.tankL, x, y, null);
@@ -41,6 +46,8 @@ public class Tank {
             case DOWN -> y += SPEED;
             default -> {}
         }
+
+        if (random.nextInt(10) > 8) this.fire();
     }
 
     public void fire() {
@@ -64,7 +71,7 @@ public class Tank {
             }
         }
 
-        tf.bullets.add( new Bullet(bx, by, this.dir, tf));
+        tf.bullets.add( new Bullet(bx, by, this.dir, tf, this.group));
     }
 
     public void die() {
@@ -107,6 +114,51 @@ public class Tank {
         this.moving = moving;
     }
 
+    public static int getWIDTH() {
+        return WIDTH;
+    }
 
+    public static void setWIDTH(int WIDTH) {
+        Tank.WIDTH = WIDTH;
+    }
 
+    public static int getHEIGHT() {
+        return HEIGHT;
+    }
+
+    public static void setHEIGHT(int HEIGHT) {
+        Tank.HEIGHT = HEIGHT;
+    }
+
+    public TankFrame getTf() {
+        return tf;
+    }
+
+    public void setTf(TankFrame tf) {
+        this.tf = tf;
+    }
+
+    public boolean isLive() {
+        return live;
+    }
+
+    public void setLive(boolean live) {
+        this.live = live;
+    }
+
+    public Random getRandom() {
+        return random;
+    }
+
+    public void setRandom(Random random) {
+        this.random = random;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
 }
