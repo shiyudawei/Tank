@@ -17,10 +17,13 @@ public class Tank {
     }
 
     public void paint(Graphics g){
-        Color c = g.getColor();
-        g.setColor(Color.YELLOW);
-        g.fillRect(x, y,50, 50);
-        g.setColor(c);
+        switch (dir){
+            case LEFT -> g.drawImage(ResourceManger.tankL, x, y, null);
+            case RIGHT -> g.drawImage(ResourceManger.tankR, x, y, null);
+            case UP -> g.drawImage(ResourceManger.tankU, x, y, null);
+            case DOWN -> g.drawImage(ResourceManger.tankD, x, y, null);
+        }
+
 
         move();
     }

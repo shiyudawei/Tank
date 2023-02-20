@@ -54,6 +54,10 @@ public class TankFrame extends Frame {
         g.setColor(Color.WHITE);
         g.drawString("子弹的数量：" + bullets.size(), 10, 60);
         myTank.paint(g);
+//        这种会报错
+//        for (Bullet bullet : bullets) {
+//            bullet.paint(g);
+//        }
         //迭代器进行迭代的时候，不能在其他地方删除，只能在迭代的内部删除
         for (int i = 0; i < bullets.size(); i++) {
             bullets.get(i).paint(g);
