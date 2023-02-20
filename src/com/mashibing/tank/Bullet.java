@@ -5,7 +5,7 @@ import java.awt.*;
 public class Bullet {
     private static final int SPEED = 20;
     private int x, y;
-    private static final int width = 30, height = 30;
+    public static final int WIDTH = ResourceManger.bulletD.getWidth(), HEIGHT = ResourceManger.bulletD.getHeight();
     private Dir dir;
     private TankFrame tf = null;
     boolean live = true;

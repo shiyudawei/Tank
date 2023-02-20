@@ -5,6 +5,8 @@ import java.awt.*;
 public class Tank {
     private int x, y;
     private Dir dir = Dir.DOWN;
+    public static int WIDTH = ResourceManger.tankD.getWidth();
+    public static int HEIGHT = ResourceManger.tankD.getHeight();
     private final int SPEED = 5;
     private boolean moving = false;
     private TankFrame tf = null;
@@ -40,7 +42,27 @@ public class Tank {
     }
 
     public void fire() {
-        tf.bullets.add( new Bullet(this.x, this.y, this.dir, tf));
+        int bx = 0, by = 0;
+        switch (dir) {
+            case LEFT ->{
+                bx = this.x - Bullet.WIDTH/2;
+                by = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
+            }
+            case RIGHT -> {
+                bx = this.x + Tank.WIDTH + Bullet.WIDTH/2;
+                by = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
+            }
+            case UP -> {
+                bx = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
+                by = this.y - Bullet.HEIGHT/2;
+            }
+            case DOWN -> {
+                bx = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
+                by = this.y + Tank.HEIGHT + Bullet.HEIGHT/2;
+            }
+        }
+
+        tf.bullets.add( new Bullet(bx, by, this.dir, tf));
     }
 
     public int getX() {
