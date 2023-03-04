@@ -10,6 +10,7 @@ public class Bullet {
     private TankFrame tf = null;
     boolean live = true;
     private Group group = Group.BAD;
+    private Rectangle rect = new Rectangle();
 
     public Bullet(int x, int y, Dir dir, TankFrame tf, Group group) {
         this.x = x;
@@ -17,6 +18,10 @@ public class Bullet {
         this.dir = dir;
         this.tf = tf;
         this.group = group;
+        this.rect.x = x;
+        this.rect.y = y;
+        this.rect.width = WIDTH;
+        this.rect.height = HEIGHT;
     }
     public void paint(Graphics g){
         if (!live){
@@ -39,6 +44,10 @@ public class Bullet {
             case DOWN -> y += SPEED;
             default -> {}
         }
+
+        // 更新rect
+        rect.x = this.x;
+        rect.y = this.y;
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT){
             live = false;
         }
@@ -46,11 +55,8 @@ public class Bullet {
 
     public void collideWith(Tank tank) {
         if (this.group == tank.getGroup()) return;
-
         //TODO: 用一个rect来记录子弹位置
-        Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
-        Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
-        if (rect1.intersects(rect2)){
+        if (rect.intersects(tank.rect)){
             tank.die();
             this.die();
         }

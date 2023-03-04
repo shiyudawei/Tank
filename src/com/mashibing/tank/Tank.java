@@ -15,6 +15,7 @@ public class Tank {
     private Random random = new Random();
     private Group group = Group.BAD;
     private Explode e;
+    public Rectangle rect = new Rectangle();
 
     public Tank(int x, int y, Dir dir, TankFrame tf, Group group) {
         this.x = x;
@@ -22,6 +23,10 @@ public class Tank {
         this.dir = dir;
         this.tf = tf;
         this.group = group;
+        this.rect.x = x;
+        this.rect.y = y;
+        this.rect.width = WIDTH;
+        this.rect.height = HEIGHT;
     }
 
     public void paint(Graphics g){
@@ -49,7 +54,8 @@ public class Tank {
             case DOWN -> y += SPEED;
             default -> {}
         }
-
+        this.rect.x = x;
+        this.rect.y = y;
         if (this.group == Group.BAD && random.nextInt(100) > 80) this.fire();
         if (this.group == Group.BAD && random.nextInt(100) > 90) randomDir();
         boundsCheck();
