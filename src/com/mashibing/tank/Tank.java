@@ -51,14 +51,20 @@ public class Tank {
         }
 
         if (this.group == Group.BAD && random.nextInt(100) > 80) this.fire();
+        if (this.group == Group.BAD && random.nextInt(100) > 90) randomDir();
+        boundsCheck();
+    }
 
-        if (random.nextInt(100) > 90) randomDir();
+    private void boundsCheck() {
+        if (this.x < 2) x = 2;
+        else if (this.y < 30) y = 30;
+        if (this.x > TankFrame.GAME_WIDTH - Tank.WIDTH) x = TankFrame.GAME_WIDTH;
+        if (this.y > TankFrame.GAME_HEIGHT - Tank.HEIGHT) y = TankFrame.GAME_HEIGHT;
     }
 
     private void randomDir() {
         // 敌人坦克随机改变移动的方向
         if (this.group == Group.GOOD) return;
-        // 获取Dir的枚举内容数组
         this.dir = Dir.values()[random.nextInt(4)];
 
     }

@@ -6,14 +6,16 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class ResourceManger {
+    //public static BufferedImage goodTankL, goodTankU, goodTankR, goodTankD;
+    //public static BufferedImage badTankL, badTankU, badTankR, badTankD;
     public static BufferedImage tankL, tankU, tankR, tankD;
     public static BufferedImage bulletL, bulletU, bulletR, bulletD;
     public static BufferedImage[] explosion = new BufferedImage[16];
 
     static {
         try {
-            tankL = ImageIO.read(ResourceManger.class.getClassLoader().getResourceAsStream("images/tankL.gif"));
             tankU = ImageIO.read(ResourceManger.class.getClassLoader().getResourceAsStream("images/tankU.gif"));
+            tankL = ImageIO.read(ResourceManger.class.getClassLoader().getResourceAsStream("images/tankL.gif"));
             tankR = ImageIO.read(ResourceManger.class.getClassLoader().getResourceAsStream("images/tankR.gif"));
             tankD = ImageIO.read(ResourceManger.class.getClassLoader().getResourceAsStream("images/tankD.gif"));
 
