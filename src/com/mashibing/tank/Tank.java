@@ -50,7 +50,17 @@ public class Tank {
             default -> {}
         }
 
-        if (random.nextInt(10) > 8) this.fire();
+        if (this.group == Group.BAD && random.nextInt(100) > 80) this.fire();
+
+        if (random.nextInt(100) > 90) randomDir();
+    }
+
+    private void randomDir() {
+        // 敌人坦克随机改变移动的方向
+        if (this.group == Group.GOOD) return;
+        // 获取Dir的枚举内容数组
+        this.dir = Dir.values()[random.nextInt(4)];
+
     }
 
     public void fire() {
